@@ -1,0 +1,23 @@
+level mechanics
+
+//Main mechanics
+-Teleporters
+-Lasers to avoid
+-Wind sections (areas of levels that push the player in different directions)
+-Keys and locked doors/walls
+
+//Sub mechanics
+//Can be used with any other mechanics
+-Slippery floors
+
+
+-Zone that has invisible walls and the player must swap between the level layouts (same level, just 2 different wall patterns. You can only see one pattern at a time and can switch to the other one at any time. Normal rules apply where if the player hits a wall then they restart the level).
+
+
+Each Zone has a distinct color the identifies with a mechanic. IE Zones that are red have teleporters, Blue zones have slippery floors, etc...
+
+Levels that use multiple mechanics get their own colors by mixing the colors of the zones of the corresponding mechanics.
+
+color swapping?
+
+TURN LASER BEAMS INTO TRIGGERS SO THE PIECES OF THE PLAYER CAN PASS THROUGH THEM AND FADE AWAY

@@ -1,0 +1,13 @@
+Menu blueprint
+
+Main Menu
+-Play
+ --Arcade
+ --Enhanced
+-Highscores
+ --Levels
+-Options
+ --Video
+ --Audio
+ --GamePlay
+-Quit
