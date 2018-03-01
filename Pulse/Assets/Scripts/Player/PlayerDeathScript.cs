@@ -60,9 +60,23 @@ public class PlayerDeathScript : MonoBehaviour {
         }*/
         else if(other.gameObject.tag == "LaserBeam")
         {
-            playerBounds.enabled = false;
+            /*playerBounds.enabled = false;
             gameManagerScript.rbSpeed = new Vector3(playerCon.horiSpeed, 0, playerCon.vertSpeed);
-            gameManagerScript.KillPlayer(2, new Vector3(0,0,0));
+            gameManagerScript.KillPlayer(2, new Vector3(0,0,0));*/
+            DedzFromLaser();
         }
+    }
+
+    public void DedzFromLaser()
+    {
+        playerBounds.enabled = false;
+        gameManagerScript.rbSpeed = new Vector3(playerCon.horiSpeed, 0, playerCon.vertSpeed);
+        gameManagerScript.KillPlayer(2, new Vector3(0, 0, 0));
+    }
+    public void DedzFromFloor()
+    {
+        playerBounds.enabled = false;
+        gameManagerScript.rbSpeed = new Vector3(playerCon.horiSpeed, 0, playerCon.vertSpeed);
+        gameManagerScript.KillPlayer(3, new Vector3(0, 0, 0));
     }
 }

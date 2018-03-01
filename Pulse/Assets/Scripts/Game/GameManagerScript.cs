@@ -9,6 +9,8 @@ public class GameManagerScript : MonoBehaviour {
     public GameObject pressToStart;
     public int gameState = 0;
 
+    GameObject[] dangerFloors;
+
     public GameObject player;
     GameObject currentPlayerObj;
     GoalZoneScript goalScript;
@@ -61,6 +63,8 @@ public class GameManagerScript : MonoBehaviour {
         subTimer3 = GameObject.FindGameObjectWithTag("SubPoint3").GetComponent<TextMeshPro>();
         subTimer4 = GameObject.FindGameObjectWithTag("SubPoint4").GetComponent<TextMeshPro>();
         subTimer5 = GameObject.FindGameObjectWithTag("SubPoint5").GetComponent<TextMeshPro>();
+
+        dangerFloors = GameObject.FindGameObjectsWithTag("DangerFloor");
     }
 	
 	// Update is called once per frame
@@ -144,6 +148,15 @@ public class GameManagerScript : MonoBehaviour {
                 playerOutlines[i].GetComponent<Rigidbody>().velocity = rbSpeed * rbVelocityMultiplier;
             }
         }
+        else if (methodOfKill == 3)
+        {
+            //Activates the camera shake for x seconds.
+            Camera.main.GetComponent<CamShake>().shakeDuration = .03f;
+            for (int i = 0; i < playerOutlines.Length; i++)
+            {
+                playerOutlines[i].GetComponent<Rigidbody>().velocity = rbSpeed * rbVelocityMultiplier;
+            }
+        }
 
         //Destroys current player object and instantiates a new one.
         StartCoroutine(RespawnDelay());
@@ -209,6 +222,14 @@ public class GameManagerScript : MonoBehaviour {
         GetCurrentPlayer();
         Destroy(currentPlayerObj);
         yield return new WaitForSeconds(respawnTime);
+        //For each gameobject with tag DangerFloor, set that material to deactivated material
+        if (dangerFloors != null)
+        {
+            foreach(GameObject floor in dangerFloors)
+            {
+                floor.GetComponent<DangerFloorScript>().ResetForSpawn();
+            }
+        }
         goalScript.ResetToLastSpawn();
         gameState = 1;
     }

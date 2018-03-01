@@ -19,6 +19,7 @@ TagManager:
   - SubPoint5
   - PlayerRB
   - LaserBeam
+  - DangerFloor
   layers:
   - Default
   - TransparentFX
