@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GoalZoneScript : MonoBehaviour {
     //public CameraFollow camScript;
@@ -9,6 +10,8 @@ public class GoalZoneScript : MonoBehaviour {
     GameManagerScript gameManagerScript;
     public GameObject player;
     public GameObject playerPrefab;
+    bool isZone3 = false;
+    public FloorManagerScript floorManage;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +24,16 @@ public class GoalZoneScript : MonoBehaviour {
         player.transform.position = listOfStartPos[startPosIndex];
 
         gameManagerScript = gameObject.GetComponent<GameManagerScript>();
+        if (SceneManager.GetActiveScene().name == "Zone3")
+        {
+            floorManage = GameObject.Find("Floor Manager").GetComponent<FloorManagerScript>();
+            isZone3 = true;
+            floorManage.levelTraps[1].SetActive(false);
+            floorManage.levelTraps[2].SetActive(false);
+            floorManage.levelTraps[3].SetActive(false);
+            floorManage.levelTraps[4].SetActive(false);
+        }
+        else floorManage = null;
     }
 	
 	// Update is called once per frame
@@ -40,10 +53,20 @@ public class GoalZoneScript : MonoBehaviour {
 
     public void NextLevel()
     {
-        if (startPosIndex == listOfStartPos.Length-1)
+        if (startPosIndex == listOfStartPos.Length - 1)
+        {
             startPosIndex = 0;
+            if (isZone3)
+                floorManage.ActivateFloor(startPosIndex);
+        }
         else
+        {
+            if(isZone3)
+                floorManage.DeactivateFloor(startPosIndex);
             startPosIndex++;
+            if(isZone3)
+                floorManage.ActivateFloor(startPosIndex);
+        }
         player.transform.position = listOfStartPos[startPosIndex];
     }
 
