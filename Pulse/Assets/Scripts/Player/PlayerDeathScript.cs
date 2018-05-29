@@ -49,9 +49,15 @@ public class PlayerDeathScript : MonoBehaviour {
     {
         if(other.gameObject.tag == "Goal")
         {
+            if (!goalScript.soloLevel)
+            {
+                camScript.NextCamera();
+            }
             gameManagerScript.TimerCheck(goalScript.startPosIndex);
-            camScript.NextCamera();
-            goalScript.NextLevel();
+            if (gameManagerScript.gameState != 2)
+            {
+                goalScript.NextLevel();
+            }
         }
         /*else if (other.gameObject.tag == "Wall")
         {

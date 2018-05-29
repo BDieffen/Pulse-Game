@@ -10,15 +10,20 @@ public class CameraFollow : MonoBehaviour {
     public int currentCamIndex = 0;
     public Vector3[] listOfPositions = new Vector3[5];
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
         listOfPositions[0] = GameObject.Find("Cam1").transform.position;
         listOfPositions[1] = GameObject.Find("Cam2").transform.position;
         listOfPositions[2] = GameObject.Find("Cam3").transform.position;
         listOfPositions[3] = GameObject.Find("Cam4").transform.position;
         listOfPositions[4] = GameObject.Find("Cam5").transform.position;
+    }
 
-        transform.position = listOfPositions[currentCamIndex];
+    // Use this for initialization
+    void Start () {
+
+
+        //transform.position = listOfPositions[currentCamIndex];
     }
 	
 	// Update is called once per frame
@@ -39,6 +44,13 @@ public class CameraFollow : MonoBehaviour {
             currentCamIndex = 0;
         else
             currentCamIndex++;
+        transform.position = listOfPositions[currentCamIndex];
+        gameObject.GetComponent<CamShake>().GetNewCamPos();
+    }
+
+    public void SetInitialCamera(int index)
+    {
+        currentCamIndex = index;
         transform.position = listOfPositions[currentCamIndex];
         gameObject.GetComponent<CamShake>().GetNewCamPos();
     }

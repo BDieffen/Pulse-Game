@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class TimeKeeper : MonoBehaviour {
 
+    public static GameObject Instance;
+
     string filePath;
+    public int zone = 0;
+    public int level = 0;
+
+    public int startingPositionFromMenu = 0;
 
     public float currentTime = 0;
     public float newHighScore = 0;
@@ -20,10 +27,20 @@ public class TimeKeeper : MonoBehaviour {
     public float[] allZone2Levels = new float[6];
     public float[] allZone3Levels = new float[6];
 
+    private void Awake()
+    {
+        if (Instance)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = gameObject;
+        }
+    }
     // Use this for initialization
     void Start () {
-        DontDestroyOnLoad(gameObject);
-
         SetArrays();
 
         if (File.Exists(filePath + "/PlayerTimes.dat"))
@@ -32,12 +49,12 @@ public class TimeKeeper : MonoBehaviour {
         }
         else Save();
 
-        WriteTimesToObjects();
+        //WriteTimesToObjects();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        	
 	}
 
     void SetArrays()
@@ -64,7 +81,7 @@ public class TimeKeeper : MonoBehaviour {
         allZone3Levels[5] = 0;
     }
 
-    void WriteTimesToObjects()
+    /*void WriteTimesToObjects()
     {
         for (int i=0;i<6;i++)
         {
@@ -92,6 +109,54 @@ public class TimeKeeper : MonoBehaviour {
             float seconds3 = allZone3Levels[i];
 
             while(seconds3 > 60f)
+            {
+                minuteTime3++;
+                seconds3 -= 60f;
+            }
+            objectsToWriteToZone3[i].text = minuteTime3 + ":" + seconds3.ToString("F2");
+        }
+    }*/
+
+    public void WriteYellowScores()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            float minuteTime = 0;
+            float seconds = allZone1Levels[i];
+
+            while (seconds > 60f)
+            {
+                minuteTime++;
+                seconds -= 60f;
+            }
+            objectsToWriteToZone1[i].text = minuteTime + ":" + seconds.ToString("F2");
+        }
+    }
+
+    public void WriteBlueScores()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            float minuteTime2 = 0;
+            float seconds2 = allZone2Levels[i];
+
+            while (seconds2 > 60f)
+            {
+                minuteTime2++;
+                seconds2 -= 60f;
+            }
+            objectsToWriteToZone2[i].text = minuteTime2 + ":" + seconds2.ToString("F2");
+        }
+    }
+
+    public void WriteRedScores()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            float minuteTime3 = 0;
+            float seconds3 = allZone3Levels[i];
+
+            while (seconds3 > 60f)
             {
                 minuteTime3++;
                 seconds3 -= 60f;

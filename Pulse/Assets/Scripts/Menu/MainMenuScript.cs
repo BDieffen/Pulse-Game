@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public TimeKeeper timeKeep;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -14,6 +16,18 @@ public class MainMenuScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void PassZone(int z)
+    {
+        timeKeep = GameObject.Find("TimeManager").GetComponent<TimeKeeper>();
+        timeKeep.zone = z;
+    }
+
+    public void PassLevel(int l)
+    {
+        timeKeep = GameObject.Find("TimeManager").GetComponent<TimeKeeper>();
+        timeKeep.startingPositionFromMenu = l;
+    }
 
     public void Play()
     {
