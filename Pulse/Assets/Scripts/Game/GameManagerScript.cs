@@ -87,11 +87,15 @@ public class GameManagerScript : MonoBehaviour {
         //Gamestate 2 is when the player finishes a level so they can view their times and score
         if(gameState == 2)
         {
+            TimeKeeper tempTime = GameObject.Find("TimeManager").GetComponent<TimeKeeper>();
             //Goes back to the main menu after pressing space once the level is finished.
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 returnToMenu.SetActive(false);
+                tempTime.theCanvas.SetActive(true);
+                tempTime.ToggleMenuObjs(1);
+
                 SceneManager.LoadScene(sceneBuildIndex: 0);
             }
         }

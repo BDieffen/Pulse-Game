@@ -20,6 +20,9 @@ TagManager:
   - PlayerRB
   - LaserBeam
   - DangerFloor
+  - YellowZone
+  - BlueZone
+  - RedZone
   layers:
   - Default
   - TransparentFX

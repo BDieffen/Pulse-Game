@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour {
         //A key press that sends the player back to the main menu. (As of right now the escape key goes back to main manu at any time during game play)
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            TimeKeeper tempTime = GameObject.Find("TimeManager").GetComponent<TimeKeeper>();
+            tempTime.theCanvas.SetActive(true);
+            tempTime.ToggleMenuObjs(1);
+
             SceneManager.LoadScene(sceneBuildIndex: 0);
         }
     }

@@ -86,7 +86,11 @@ public class GoalZoneScript : MonoBehaviour {
             }
             player.transform.position = listOfStartPos[startPosIndex];
         }
-        else SceneManager.LoadScene(sceneBuildIndex: 0);
+        else
+        {
+            timeKeeps.ToggleMenuObjs(1);
+            SceneManager.LoadScene(sceneBuildIndex: 0);
+        }
     }
 
     public void ResetToLastSpawn()

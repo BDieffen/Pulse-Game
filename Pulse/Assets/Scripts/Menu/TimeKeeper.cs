@@ -27,6 +27,9 @@ public class TimeKeeper : MonoBehaviour {
     public float[] allZone2Levels = new float[6];
     public float[] allZone3Levels = new float[6];
 
+    public GameObject theCanvas;
+    public GameObject[] mainMenuToggles;
+
     private void Awake()
     {
         if (Instance)
@@ -49,7 +52,8 @@ public class TimeKeeper : MonoBehaviour {
         }
         else Save();
 
-        //WriteTimesToObjects();
+        theCanvas = GameObject.Find("Canvas");
+        mainMenuToggles = GameObject.FindGameObjectsWithTag("MainMenuToggle");
     }
 	
 	// Update is called once per frame
@@ -80,42 +84,6 @@ public class TimeKeeper : MonoBehaviour {
         allZone3Levels[4] = 0;
         allZone3Levels[5] = 0;
     }
-
-    /*void WriteTimesToObjects()
-    {
-        for (int i=0;i<6;i++)
-        {
-            float minuteTime = 0;
-            float seconds = allZone1Levels[i];
-
-            while(seconds > 60f)
-            {
-                minuteTime++;
-                seconds -= 60f;
-            }
-            objectsToWriteToZone1[i].text = minuteTime + ":" + seconds.ToString("F2");
-
-            float minuteTime2 = 0;
-            float seconds2 = allZone2Levels[i];
-
-            while(seconds2 > 60f)
-            {
-                minuteTime2++;
-                seconds2 -= 60f;
-            }
-            objectsToWriteToZone2[i].text = minuteTime2 + ":" + seconds2.ToString("F2");
-
-            float minuteTime3 = 0;
-            float seconds3 = allZone3Levels[i];
-
-            while(seconds3 > 60f)
-            {
-                minuteTime3++;
-                seconds3 -= 60f;
-            }
-            objectsToWriteToZone3[i].text = minuteTime3 + ":" + seconds3.ToString("F2");
-        }
-    }*/
 
     public void WriteYellowScores()
     {
@@ -205,5 +173,27 @@ public class TimeKeeper : MonoBehaviour {
         public float[] zone1Levels;
         public float[] zone2Levels;
         public float[] zone3Levels;
+    }
+
+    public void ToggleMenuObjs(int i)
+    {
+        if (i == 0)
+        {
+            foreach (GameObject toggleObj in mainMenuToggles)
+            {
+                if (toggleObj.activeInHierarchy)
+                    toggleObj.SetActive(false);
+            }
+        }
+        else if (i == 1)
+        {
+            foreach (GameObject toggleObj in mainMenuToggles)
+            {
+                if (!toggleObj.activeInHierarchy)
+                    toggleObj.SetActive(true);
+            }
+        }
+        else Debug.Log("Please pass in either a 1(on) or 0(off)");
+
     }
 }
