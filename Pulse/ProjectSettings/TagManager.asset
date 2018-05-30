@@ -23,6 +23,7 @@ TagManager:
   - YellowZone
   - BlueZone
   - RedZone
+  - MainMenuToggle
   layers:
   - Default
   - TransparentFX
