@@ -53,10 +53,13 @@ public class GoalZoneScript : MonoBehaviour {
         {
             floorManage = GameObject.Find("Floor Manager").GetComponent<FloorManagerScript>();
             isZone3 = true;
+            floorManage.levelTraps[0].SetActive(false);
             floorManage.levelTraps[1].SetActive(false);
             floorManage.levelTraps[2].SetActive(false);
             floorManage.levelTraps[3].SetActive(false);
             floorManage.levelTraps[4].SetActive(false);
+
+            floorManage.levelTraps[startPosIndex].SetActive(true);
         }
         else floorManage = null;
     }
